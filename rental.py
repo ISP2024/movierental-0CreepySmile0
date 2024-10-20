@@ -1,4 +1,6 @@
+import datetime
 from movie import Movie
+from pricing import NewRelease, RegularPrice, ChildrenPrice
 
 
 class Rental:
@@ -12,13 +14,13 @@ class Rental:
     For simplicity of this application only days_rented is recorded.
     """
 
-    def __init__(self, movie, days_rented, price_code):
+    def __init__(self, movie, days_rented):
         """Initialize a new movie rental object for
         a movie with known rental period (daysRented).
         """
         self.movie = movie
         self.days_rented = days_rented
-        self.price_code = price_code
+        self.price_code = self._price_code_for_movie()
 
     def get_movie(self) -> Movie:
         return self.movie
@@ -26,8 +28,19 @@ class Rental:
     def get_days_rented(self):
         return self.days_rented
 
-    def get_price_code(self):
-        return self.price_code
+    def _price_code_for_movie(self):
+        """
+        Deciding price code depends on attributes of movie.
+
+        The movie that release this year will follow NewRelease pricing rule.
+        The movie that consider as children movie will follow ChildrenPrice pricing rule.
+        Otherwise, follow Regular pricing rule
+        """
+        if self.movie.year == datetime.datetime.now().year:
+            return NewRelease()
+        if "Children" in self.movie.genre or "Childrens" in self.movie.genre:
+            return ChildrenPrice()
+        return RegularPrice()
 
     def get_price(self):
         # compute rental change

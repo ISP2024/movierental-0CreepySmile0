@@ -22,4 +22,4 @@ See [Resources](https://cpske.github.io/ISP/assignment/movierental/movierental-p
 
 - 2.1 Inappropriate Intimacy. `Rental` class use `price_code` from movie class to calculate price and points.
 - 2.2 Single Responsibility Principle. `Rental` class is the only class that need `price_code` for calculation, while `Movie` doesn't actually need it.
-
+- 5.2 I define `price_code_for_movie` as method of `Rental` class. This design are *Low Coupling* because the method itself doesn't need additional parameter at all, *High Cohesion* as the `Rental` class is the only class that use `price_code`
