@@ -18,3 +18,8 @@ Before and after each refactoring you should **run the unit tests**.
 
 See [Resources](https://cpske.github.io/ISP/assignment/movierental/movierental-part1#resources) in the assignment description.
 
+## Rationale
+
+- 2.1 Inappropriate Intimacy. `Rental` class use `price_code` from movie class to calculate price and points.
+- 2.2 Single Responsibility Principle. `Rental` class is the only class that need `price_code` for calculation, while `Movie` doesn't actually need it.
+
